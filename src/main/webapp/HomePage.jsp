@@ -25,7 +25,8 @@
 <%
 	}else{
 %>
-<a href=UserPage.jsp>User Login</a>
+<!-- UPDATE YOGESH -->
+<a href=login.jsp>User Login</a>
 <%
 	}
 %>

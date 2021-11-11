@@ -1,10 +1,8 @@
 package com.yogesh.flyaway.dao;
 
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.catalina.User;
 import org.hibernate.HibernateException;
 
 import com.yogesh.flyaway.model.FlightDetails;

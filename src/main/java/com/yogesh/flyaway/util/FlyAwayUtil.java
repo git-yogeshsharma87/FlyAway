@@ -30,7 +30,9 @@ public class FlyAwayUtil {
 				props.put(Environment.DRIVER, "com.mysql.jdbc.Driver");
 				props.put(Environment.URL, "jdbc:mysql://localhost:3306/flyawayDB?useSSL=false");
 				props.put(Environment.USER, "root");
-				props.put(Environment.PASS, "Jsr@30071987"); 
+				//props.put(Environment.PASS, "Jsr@30071987");
+				//Update Yogesh
+				props.put(Environment.PASS, "root"); 
 				props.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
 				props.put(Environment.SHOW_SQL, "true");
 				props.put(Environment.FORMAT_SQL,"true");

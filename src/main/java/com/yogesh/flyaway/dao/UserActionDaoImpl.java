@@ -64,6 +64,12 @@ public class UserActionDaoImpl implements UserActionDao {
 			e.printStackTrace();
 			throw e;
 		}
+		catch (Exception ex) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			ex.printStackTrace();
+		}
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.yogesh.flyaway.dao.UserActionDao;
 import com.yogesh.flyaway.dao.UserActionDaoImpl;
+import com.yogesh.flyaway.model.UserDetails;
 
 /**
  * Controller to call model and views
@@ -67,12 +68,12 @@ public class UserController extends HttpServlet {
 
 			// admin login
 		case "/adminLogin":
-
+				System.out.println();
 			break;
 			
 			// User registration
 		case "/UserRegistration":
-
+			registerUser(request,response);
 			break;
 
 		default:
@@ -81,6 +82,7 @@ public class UserController extends HttpServlet {
 			break;
 		}	
 		}
+
 	private void authenticate(HttpServletRequest request,HttpServletResponse response) throws ServletException, Exception {
 		String username = request.getParameter("name");
 		String password = request.getParameter("password");
@@ -94,5 +96,17 @@ public class UserController extends HttpServlet {
 		
 	}
 	
+	private void registerUser(HttpServletRequest request, HttpServletResponse response) {
+		
+		UserDetails userInput = new UserDetails(request.getParameter("email"), 
+				request.getParameter("password"), request.getParameter("name"), 
+				request.getParameter("aadhaar"), false);
+		
+		
+		UserActionDao dao = new UserActionDaoImpl();
+		
+		dao.addUser(userInput);
+		
+	}
 
 }
