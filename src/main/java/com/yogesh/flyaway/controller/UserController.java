@@ -39,14 +39,7 @@ public class UserController extends HttpServlet {
 		
 		switch (action) {
 		case "/searchFlight":
-			response.sendRedirect("login.jsp");
-			try {
-				authenticate(request,response);
-			} catch (ServletException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			
 			break;
 		case "/login":
 			response.sendRedirect("login.jsp");
@@ -57,6 +50,27 @@ public class UserController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			break;
+
+		case "/adminHome":
+			
+			break;
+
+			
+		case "/ForgotPassword":
+			
+			break;
+
+		case "/HomePage.jsp":
+
+			break;
+
+		case "/adminLogin":
+
+			break;
+
+		case "/UserRegistration":
+
 			break;
 
 		default:

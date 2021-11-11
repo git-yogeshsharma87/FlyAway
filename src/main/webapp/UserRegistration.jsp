@@ -12,7 +12,7 @@
 <br><br>
 <center>
 <div style="border:3px solid black;width:25%;border-radius:20px;padding:20px" align="center">
-<form action=UserRegistration method=post>
+<form action="/UserRegistration" method=post>
 	<label for=email>Email :-</label> <input type="email" name=email id=email /><br><br>
 	<label for=password>Password :-</label> <input type="password" name=password id=pass /><br><br>
 	<label for=name>Name :-</label> <input type="text" name=name id=name /><br><br>
