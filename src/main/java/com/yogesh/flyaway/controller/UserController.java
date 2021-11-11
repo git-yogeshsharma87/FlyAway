@@ -38,9 +38,12 @@ public class UserController extends HttpServlet {
 		String action = request.getServletPath();
 		
 		switch (action) {
+		// to search flight
 		case "/searchFlight":
+			response.sendRedirect("HomePage");
 			
 			break;
+			// user login
 		case "/login":
 			response.sendRedirect("login.jsp");
 			try {
@@ -52,23 +55,22 @@ public class UserController extends HttpServlet {
 			}
 			break;
 
+			// To add a flight
 		case "/adminHome":
 			
 			break;
 
-			
+			// admin pass change/reset
 		case "/ForgotPassword":
 			
 			break;
 
-		case "/HomePage.jsp":
-
-			break;
-
+			// admin login
 		case "/adminLogin":
 
 			break;
-
+			
+			// User registration
 		case "/UserRegistration":
 
 			break;
