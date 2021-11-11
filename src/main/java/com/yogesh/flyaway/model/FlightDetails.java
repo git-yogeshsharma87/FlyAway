@@ -1,6 +1,7 @@
 package com.yogesh.flyaway.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +17,7 @@ import javax.persistence.Table;
 public class FlightDetails {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long fId ;
 	
 	@Column(name = "flight_name")
@@ -33,25 +35,62 @@ public class FlightDetails {
 	@Column(name = "date")
 	private Date fDate;
 	
-	// Parameterized Constructor to pull all flight details 
-	public FlightDetails(String flightName, String fSrc, String fDest, int fPrice, Date fDate) {
+	@ManyToOne
+	private UserDetails users;
+	
+	public FlightDetails() {
 		super();
-		this.fName = flightName;
+	}
+
+
+	// Parameterized Constructor to pull all flight details 
+
+	public FlightDetails(String fName, String fSrc, String fDest, int fPrice, Date fDate, UserDetails users) {
+		super();
+		this.fName = fName;
 		this.fSrc = fSrc;
 		this.fDest = fDest;
 		this.fPrice = fPrice;
 		this.fDate = fDate;
+		this.users = users;
 	}
-	
+
+
+
+
 	
    // To search a flight
 	public FlightDetails(String fSrc, String fDest, Date fDate) {
-		super();
 		this.fSrc = fSrc;
 		this.fDest = fDest;
 		this.fDate = fDate;
 	}
 
+
+
+	public UserDetails getUsers() {
+		return users;
+	}
+
+
+	public void setUsers(UserDetails users) {
+		this.users = users;
+	}
+
+
+	public String getfName() {
+		return fName;
+	}
+
+
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+
+
+	public long getfId() {
+		return fId;
+	}
 
 
 	// GETTERS AND SETTERS

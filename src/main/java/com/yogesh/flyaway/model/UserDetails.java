@@ -1,5 +1,6 @@
 package com.yogesh.flyaway.model;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -7,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +18,7 @@ import javax.persistence.Table;
 public class UserDetails {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long uId;
 	
 	@Column(name = "email")
@@ -23,7 +27,7 @@ public class UserDetails {
 	@Column(name = "password")
 	private String password;
 	
-	@Column(name = "name")
+	@Column(name = "name",unique = true)
 	private String name;
 	
 	@Column(name = "aadhaar")
@@ -32,14 +36,22 @@ public class UserDetails {
 	@Column(name = "role")
 	private boolean role;
 	
-	
+	@OneToMany(mappedBy = "users")
+	private List<FlightDetails> flights;
 	
 
 
-	public UserDetails(String email, String password) {
+	public UserDetails() {
 		super();
-		this.email = email;
+	}
+
+	public UserDetails(String name, String password) {
+		this.name = name;
 		this.password = password;
+	}
+
+	public long getuId() {
+		return uId;
 	}
 
 	public boolean isRole() {
@@ -51,15 +63,33 @@ public class UserDetails {
 	}
 
 	
+	public List<FlightDetails> getFlights() {
+		return flights;
+	}
 
-	public UserDetails(String email, String password, String name, String aadhaar, boolean role) {
+	public void setFlights(List<FlightDetails> flights) {
+		this.flights = flights;
+	}
+
+	public UserDetails(String email, String password, String name, String aadhaar, boolean role,
+			List<FlightDetails> flights) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.name = name;
 		this.aadhaar = aadhaar;
 		this.role = role;
+		this.flights = flights;
 	}
+
+	public UserDetails(String email, String password, String name, String aadhaar, boolean role) {
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.aadhaar = aadhaar;
+		this.role = role;
+	}
+
 	
 
 	public String getEmail() {

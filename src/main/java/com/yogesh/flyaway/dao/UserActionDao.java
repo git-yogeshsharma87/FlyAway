@@ -18,11 +18,15 @@ public interface UserActionDao {
 	
 	void addFlight(FlightDetails flightDetails) throws HibernateException;
 	
-	void userLogin(String username, String password) throws HibernateException;
+	boolean userLogin(String username, String password) throws HibernateException;
 	
-	void adminLogin(String username, String password) throws HibernateException;
+	boolean adminLogin(String username, String password) throws HibernateException;
 	
-	void changePass(String username, String password) throws HibernateException;
+	boolean bookFlight(String username, FlightDetails flight);
+
+	UserDetails userDetails(String username);
+	
+	boolean changePass(String username, String password) throws HibernateException;
 	
 	
 
