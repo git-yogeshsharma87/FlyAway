@@ -38,6 +38,16 @@ public class UserController extends HttpServlet {
 		String action = request.getServletPath();
 		
 		switch (action) {
+		case "/searchFlight":
+			response.sendRedirect("login.jsp");
+			try {
+				authenticate(request,response);
+			} catch (ServletException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			break;
 		case "/login":
 			response.sendRedirect("login.jsp");
 			try {

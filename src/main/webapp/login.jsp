@@ -32,5 +32,19 @@
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
+	
+	<br><br>
+<i>New User-Create account</i>
+<h4><a href=UserRegistration.jsp style="font-size:25;color:red;">Create Account</a></h4>
+
+<%
+	String message=(String)session.getAttribute("message");
+	if(message!=null){
+%>
+<p style="color:silver;"><%=message %></p>
+<%
+		session.setAttribute("message", null);
+	}
+%>
 </body>
 </html>

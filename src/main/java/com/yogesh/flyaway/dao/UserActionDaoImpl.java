@@ -22,7 +22,8 @@ public class UserActionDaoImpl implements UserActionDao {
 
 		try (Session session = FlyAwayUtil.getSessionFactory().openSession()) {
 
-			flightsList = session.createQuery("from flight_details").list();
+			 flightsList = (List<FlightDetails>) session.createQuery("from flight_details where source = :src and destination = :dest and date = :date").setParameter("src", fSrc).setParameter("dest", fDest).setParameter("date", fDate).getResultList();
+			 
 			// transaction = session.beginTransaction();
 			// flightsList = session.createQuery("from flight_details where source="+fSrc
 			// "and destination ="+ fDest "and date= fDate").list();
@@ -168,10 +169,6 @@ public class UserActionDaoImpl implements UserActionDao {
 			user = (UserDetails) session.createQuery("from user_details where name ="+username);
 					
 			flight.setUsers(user);
-//			String hql = "UPDATE flight_details set users = :uname and password = :pass ";
-//			Query query = session.createQuery(hql);
-//			query.setParameter("uname", username);
-//			int result = query.executeUpdate();
 			transaction.commit();
 				status = true;
 
