@@ -10,7 +10,7 @@ import com.yogesh.flyaway.model.UserDetails;
 
 public interface UserActionDao {
 	
-	List<FlightDetails> searchFlights(String fSrc, String fDest, Date fDate );
+	List<FlightDetails> searchFlights(String fSrc, String fDest, String departure );
 	
 	void addUser(UserDetails user) throws HibernateException;
 	

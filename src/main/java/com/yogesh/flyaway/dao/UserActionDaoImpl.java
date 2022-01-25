@@ -15,7 +15,7 @@ import com.yogesh.flyaway.util.FlyAwayUtil;
 public class UserActionDaoImpl implements UserActionDao {
 
 	@Override
-	public List<FlightDetails> searchFlights(String fSrc, String fDest, Date fDate) {
+	public List<FlightDetails> searchFlights(String fSrc, String fDest, String fDate) {
 
 		// Transaction transaction = null;
 		List<FlightDetails> flightsList = null;

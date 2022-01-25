@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.yogesh.flyaway.dao.TestUserActionDaoImpl
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.982 s <<< FAILURE! - in com.yogesh.flyaway.dao.TestUserActionDaoImpl
-testAddUser(com.yogesh.flyaway.dao.TestUserActionDaoImpl)  Time elapsed: 2.949 s  <<< ERROR!
-java.lang.IllegalStateException: org.hibernate.resource.jdbc.internal.LogicalConnectionManagedImpl@34523d46 is closed
-	at com.yogesh.flyaway.dao.TestUserActionDaoImpl.testAddUser(TestUserActionDaoImpl.java:15)
-

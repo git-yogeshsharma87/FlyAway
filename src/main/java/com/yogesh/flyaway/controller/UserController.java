@@ -1,6 +1,7 @@
 package com.yogesh.flyaway.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,9 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.yogesh.flyaway.dao.UserActionDao;
 import com.yogesh.flyaway.dao.UserActionDaoImpl;
+import com.yogesh.flyaway.model.FlightDetails;
 import com.yogesh.flyaway.model.UserDetails;
 
 /**
@@ -40,8 +43,22 @@ public class UserController extends HttpServlet {
 		
 		switch (action) {
 		// to search flight
-		case "/searchFlight":
-			response.sendRedirect("HomePage");
+		case "/searchFlights":
+		//	response.sendRedirect("HomePage");
+			String from=request.getParameter("fSrc");
+			String to=request.getParameter("fDest");
+			String departure=request.getParameter("departure");
+			
+			
+				List<FlightDetails> flights=userAction.searchFlights(from, to, departure);			
+				HttpSession session=request.getSession();
+				session.setAttribute("flights", flights);
+				
+			 /*catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+			response.sendRedirect("FlightList.jsp");
 			
 			break;
 			// user login

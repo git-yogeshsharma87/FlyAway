@@ -47,7 +47,7 @@
     <option value="Hyderabd">Hyderabad</option>
   </select><br><br>
  <label for="fDate">Date:</label>
-  <input type="date" id="fDate" name="fDate"><br><br>
+	<label for=departure>Departure :-</label> <input type=date name=departure id=departure/><br><br>
   	<label for=travellers>Travellers :-</label> <input type=number name=travellers id=travellers/><br><br>
 	<input type=submit value=Search /> <input type=reset />
 </form>
