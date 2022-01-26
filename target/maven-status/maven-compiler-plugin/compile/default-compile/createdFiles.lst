@@ -1,6 +1,0 @@
-com\yogesh\flyaway\model\UserDetails.class
-com\yogesh\flyaway\util\FlyAwayUtil.class
-com\yogesh\flyaway\dao\UserActionDao.class
-com\yogesh\flyaway\dao\UserActionDaoImpl.class
-com\yogesh\flyaway\controller\UserController.class
-com\yogesh\flyaway\model\FlightDetails.class

@@ -63,7 +63,7 @@ public class UserController extends HttpServlet {
 			break;
 			// user login
 		case "/login":
-			response.sendRedirect("login.jsp");
+			//response.sendRedirect("login.jsp");
 			try {
 				authenticate(request,response);
 			} catch (ServletException e) {
@@ -101,10 +101,10 @@ public class UserController extends HttpServlet {
 		}
 
 	private void authenticate(HttpServletRequest request,HttpServletResponse response) throws ServletException, Exception {
-		String username = request.getParameter("name");
+		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		if(userAction.userLogin(username, password)) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("login-success");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login-success.jsp");
 			dispatcher.forward(request, response);
 		}
 		else {

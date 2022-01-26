@@ -15,9 +15,9 @@
 <%
 	@SuppressWarnings("unchecked")
 	HashMap<String,String> user=(HashMap<String,String>)session.getAttribute("user");
-	if(user==null){
+	/* if(user==null){
 		response.sendRedirect("UserPage.jsp");
-	}
+	} */
 %>
 <p align="center"  style="color:green;font-size:40px;font-weight:bold">Flight Booked Successfully</p>
 </body>

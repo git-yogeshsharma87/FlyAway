@@ -10,5 +10,8 @@
 	<div align="center">
 		<h1>You have logged in successfully</h1>
 	</div>
+	<%
+	/* response.sendRedirect("BookFlight.jsp"); */
+	%>
 </body>
 </html>

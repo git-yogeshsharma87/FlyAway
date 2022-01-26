@@ -1,5 +1,6 @@
 package com.yogesh.flyaway.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -11,10 +12,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-@Entity
-@Table(name = "flight_details")
-public class FlightDetails {
+@Entity (name = "flight_details")
+public class FlightDetails implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +35,7 @@ public class FlightDetails {
 	private int fPrice;
 	
 	@Column(name = "date")
+	@Temporal(TemporalType.DATE)
 	private Date fDate;
 	
 	@ManyToOne

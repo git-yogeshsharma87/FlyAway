@@ -1,5 +1,7 @@
 package com.yogesh.flyaway.dao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -17,23 +19,28 @@ public class UserActionDaoImpl implements UserActionDao {
 	@Override
 	public List<FlightDetails> searchFlights(String fSrc, String fDest, String fDate) {
 
-		// Transaction transaction = null;
+		Transaction transaction = null;
 		List<FlightDetails> flightsList = null;
 
 		try (Session session = FlyAwayUtil.getSessionFactory().openSession()) {
 
-			 flightsList = (List<FlightDetails>) session.createQuery("from flight_details where source = :src and destination = :dest and date = :date").setParameter("src", fSrc).setParameter("dest", fDest).setParameter("date", fDate).getResultList();
-			 
-			// transaction = session.beginTransaction();
+			transaction = session.beginTransaction();
+			FlightDetails flightDetails = new FlightDetails();
+			flightDetails.setfDate(new SimpleDateFormat("yyyy-MM-dd").parse(fDate));
+			flightsList = (List<FlightDetails>) session
+					.createQuery("from flight_details where source = :src and destination = :dest and date = :date")
+					.setParameter("src", fSrc).setParameter("dest", fDest)
+					.setParameter("date", flightDetails.getfDate()).getResultList();
 			// flightsList = session.createQuery("from flight_details where source="+fSrc
 			// "and destination ="+ fDest "and date= fDate").list();
-//			String hql = "from flight_details where source = :src and destination = :dest and date = :date";
-//			Query query = session.createQuery(hql);
-//			query.setParameter("src", fSrc);
-//			query.setParameter("dest", fDest);
-//			query.setParameter("date", fDate);
-//			flightsList = query.list();
-			// transaction.commit();
+			/*
+			 * String hql =
+			 * "from flight_details where source = :src and destination = :dest"; Query
+			 * query = session.createQuery(hql); query.setParameter("src", fSrc);
+			 * query.setParameter("dest", fDest); //query.setParameter("date", fDate);
+			 * flightsList = query.list();
+			 */
+			transaction.commit();
 
 		} catch (HibernateException e) {
 //			if (transaction != null) {
@@ -41,6 +48,8 @@ public class UserActionDaoImpl implements UserActionDao {
 //			}
 			e.printStackTrace();
 			throw e;
+		} catch (ParseException pe) {
+			pe.printStackTrace();
 		}
 
 		return flightsList;
@@ -63,8 +72,7 @@ public class UserActionDaoImpl implements UserActionDao {
 			}
 			e.printStackTrace();
 			throw e;
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			if (transaction != null) {
 				transaction.rollback();
 			}
@@ -98,15 +106,14 @@ public class UserActionDaoImpl implements UserActionDao {
 		UserDetails result = null;
 		try (Session session = FlyAwayUtil.getSessionFactory().openSession()) {
 			transaction = session.beginTransaction();
-			result = (UserDetails) session
-					.createQuery("from user_details U where U.name = :userName").setParameter("username", username)
-					.uniqueResult();
+			result = (UserDetails) session.createQuery("from user_details U where U.email = :userName")
+					.setParameter("userName", username).uniqueResult();
 			if (result != null && result.getPassword().equals(password)) {
 				return true;
 			}
 			transaction.commit();
 		} catch (HibernateException e) {
-			if(transaction != null) {
+			if (transaction != null) {
 				transaction.rollback();
 			}
 
@@ -137,7 +144,7 @@ public class UserActionDaoImpl implements UserActionDao {
 
 	@Override
 	public boolean changePass(String username, String password) throws HibernateException {
-		if(!adminLogin(username,password)) {
+		if (!adminLogin(username, password)) {
 			return false;
 		}
 		boolean status = false;
@@ -150,7 +157,7 @@ public class UserActionDaoImpl implements UserActionDao {
 			query.setParameter("pass", password);
 			int result = query.executeUpdate();
 			transaction.commit();
-			if(result!=0) {
+			if (result != 0) {
 				status = true;
 
 			}
@@ -172,12 +179,9 @@ public class UserActionDaoImpl implements UserActionDao {
 		UserDetails user = null;
 		try (Session session = FlyAwayUtil.getSessionFactory().openSession()) {
 			transaction = session.beginTransaction();
-			user = (UserDetails) session.createQuery("from user_details where name ="+username);
-					
-			flight.setUsers(user);
+			session.saveOrUpdate(flight);
 			transaction.commit();
-				status = true;
-
+			status = true;
 		} catch (HibernateException e) {
 			if (transaction != null) {
 				transaction.rollback();
@@ -194,18 +198,17 @@ public class UserActionDaoImpl implements UserActionDao {
 
 		try (Session session = FlyAwayUtil.getSessionFactory().openSession()) {
 
-			userDetail = (UserDetails) session.createQuery("from user_details where name = "+username);
-	
-		
+			userDetail = (UserDetails) session.createQuery("from user_details where name = " + username);
+
 		} catch (HibernateException e) {
 //			if (transaction != null) {
 //			transaction.rollback();
 //		}
-		e.printStackTrace();
-		throw e;
+			e.printStackTrace();
+			throw e;
+		}
+
+		return userDetail;
+
 	}
-
-	return userDetail;
-
-}
 }
