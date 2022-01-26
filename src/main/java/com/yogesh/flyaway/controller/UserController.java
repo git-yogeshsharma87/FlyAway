@@ -1,6 +1,8 @@
 package com.yogesh.flyaway.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -73,6 +75,30 @@ public class UserController extends HttpServlet {
 			}
 			break;
 
+		case "/bookFlights":
+			//	response.sendRedirect("HomePage");
+				String fromLocation=request.getParameter("fSrc");
+				String toLocation=request.getParameter("fDest");
+				String departureTime=request.getParameter("departure");
+			FlightDetails flightDetails=null;
+			try {
+				flightDetails = new FlightDetails(fromLocation, toLocation, new SimpleDateFormat("yyyy-MM-dd").parse(departureTime));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+				
+					boolean isFlightBooked=userAction.bookFlight("",flightDetails);			
+					HttpSession sess=request.getSession();
+					
+					//sess.setAttribute("flights", flight);
+					
+				 /*catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+				response.sendRedirect("FlightList.jsp");
+				
+				break;
 			// To add a flight
 		case "/adminHome":
 			

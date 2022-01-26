@@ -1,3 +1,4 @@
+<%@page import="com.yogesh.flyaway.model.FlightDetails"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
 <br><br>
 <%
 	@SuppressWarnings("unchecked")
-	List<String[]> flights=(List<String[]>)session.getAttribute("flights");
+List<FlightDetails> flights=(List<FlightDetails>)session.getAttribute("flights");
 	if(flights!=null){
 %>
 
@@ -22,21 +23,21 @@
 <center>
 <table border="1">
 <tr>
-	<th>Name</th>
-	<th>Time</th>
-	<th>Price</th>
+	<th>From</th>
+	<th>To</th>
+	<th>Date</th>
 </tr>
 
 
 
 <%
-	for(String[] flight:flights){
+	for(FlightDetails flight:flights){
 %>
 
 <tr>
-<td><%=flight[0]%></td>
-<td><%=flight[1]%></td>
-<td><%=flight[2]%></td>
+<td><%=flight.getfSrc()%></td>
+<td><%=flight.getfDest()%></td>
+<td><%=flight.getfDate()%></td>
 </tr>
 </table>
 </center>
