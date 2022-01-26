@@ -89,7 +89,8 @@ public class UserController extends HttpServlet {
 				
 					boolean isFlightBooked=userAction.bookFlight("",flightDetails);			
 					HttpSession sess=request.getSession();
-					
+					List<FlightDetails> flightList=userAction.searchFlights(fromLocation, toLocation, departureTime);			
+					sess.setAttribute("flights", flightList);
 					//sess.setAttribute("flights", flight);
 					
 				 /*catch (ClassNotFoundException e) {
